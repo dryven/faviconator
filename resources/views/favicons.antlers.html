@@ -1,0 +1,10 @@
+{{ if error }}
+<!-- {{ error }} -->
+{{ else }}
+{{ favicons }}
+	<link rel="{{ relation }}" sizes="{{ dimensions }}" href="{{ file }}">
+{{ /favicons }}
+	{{ if file_svg }}<link rel="icon" href="{{ file_svg }}">{{ /if }}
+	<link rel="icon" href="/favicon.ico">
+	<meta name="theme-color" content="{{ favicons:theme_color ?? '#ffffff' }}">
+{{ /if }}

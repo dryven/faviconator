@@ -1,0 +1,43 @@
+{
+	"name": "ddm-studio/faviconator",
+	"type": "statamic-addon",
+	"version": "1.0.0",
+	"description": "",
+	"keywords": [
+		"favicon",
+		"favicon generator"
+	],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "DDM",
+			"email": "hallo@ddm.studio",
+			"homepage": "https://ddm.studio/"
+		}
+	],
+	"support": {
+		"email": "support@ddm.studio"
+	},
+	"require": {
+		"php": "^7.3 || ^8.0",
+		"statamic/cms": "^3.0",
+		"ext-gd": "^8.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"DDM\\Faviconator\\": "src"
+		}
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"DDM\\Faviconator\\ServiceProvider"
+			]
+		},
+		"statamic": {
+			"name": "Faviconator",
+			"description": "",
+			"version": "1.0.0"
+		}
+	}
+}
