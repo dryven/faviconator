@@ -34,10 +34,7 @@
 									'placeholder' => Faviconator::getCpTranslation('file_png_placeholder'),
 									'container' => self::getAssetsContainerHandle(),
 									'max_files' => 1,
-									'width' => 50,
-//									'validate' => [
-//										'mimes:png'
-//									]
+									'validate' => 'mimes:png'
 								]
 							],
 							[
@@ -49,10 +46,7 @@
 									'placeholder' => Faviconator::getCpTranslation('file_svg_placeholder'),
 									'container' => self::getAssetsContainerHandle(),
 									'max_files' => 1,
-									'width' => 50,
-//									'validate' => [
-//										'mimes:svg'
-//									]
+									'validate' => 'mimes:svg'
 								]
 							],
 							[

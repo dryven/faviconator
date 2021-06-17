@@ -21,7 +21,7 @@
 	"require": {
 		"php": "^7.3 || ^8.0",
 		"statamic/cms": "^3.0",
-		"ext-gd": "^8.0"
+		"ext-gd": "*"
 	},
 	"autoload": {
 		"psr-4": {
