@@ -1,1 +1,2 @@
 # Faviconator Documentation
+
