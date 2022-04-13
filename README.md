@@ -8,11 +8,11 @@
 
 ## Features
 
-* Generates favicons in different sizes
-    * an ICO, the most supported format for favicons _since 1999_.
-    * PNGs for bigger screens like laptops and desktops.
-    * Touch icons for smartphones and tablets.
-* Add a Safari mask icon, to give your website an unique [pinned tab icon](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/pinnedTabs/pinnedTabs.html).
+-   Generates favicons in different sizes
+    -   an ICO, the most supported format for favicons _since 1999_.
+    -   PNGs for bigger screens like laptops and desktops.
+    -   Touch icons for smartphones and tablets.
+-   Add a Safari mask icon, to give your website an unique [pinned tab icon](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/pinnedTabs/pinnedTabs.html).
 
 ## Documentation
 
@@ -20,6 +20,6 @@ For more information about how to use this addon see our [documentation](DOCUMEN
 
 ## Our other addons
 
-* **[Cookie Byte](https://statamic.com/addons/dryven/cookie-byte):** Cookie Byte is an important addon to
-  make your website fit for the current privacy and cookie policies. It adds a modal and many other privacy-related
-  features to your website.
+-   **[Cookie Byte](https://statamic.com/addons/dryven/cookie-byte):** Cookie Byte is an important addon to
+    make your website fit for the current privacy and cookie policies. It adds a modal and many other privacy-related
+    features to your website.

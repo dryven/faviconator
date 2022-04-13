@@ -1,18 +1,19 @@
 <?php
 
-	namespace Dryven\Faviconator\Exceptions;
+namespace Dryven\Faviconator\Exceptions;
 
-	use Exception;
+use Exception;
 
-	/**
-	 * Class FaviconatorException
-	 * @package Dryven\Faviconator\Exception
-	 * @author dryven
-	 */
-	class FaviconatorException extends Exception {
+/**
+ * Class FaviconatorException
+ * @package Dryven\Faviconator\Exception
+ * @author dryven
+ */
+class FaviconatorException extends Exception
+{
 
-		public function __toString() {
-			parent::__toString();
-		}
-
+	public function __toString()
+	{
+		parent::__toString();
 	}
+}

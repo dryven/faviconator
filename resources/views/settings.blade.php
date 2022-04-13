@@ -11,6 +11,6 @@
 
 	@include('statamic::partials.docs-callout', [
 		'topic' => 'Faviconator',
-		'url' => 'https://statamic.com/addons/ddm-studio/faviconator'
+		'url' => 'https://statamic.com/addons/dryven/faviconator'
 	])
 @stop
