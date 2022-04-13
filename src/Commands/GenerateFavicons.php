@@ -21,7 +21,7 @@ class GenerateFavicons extends Command
 	 *
 	 * @var string
 	 */
-	protected $signature = 'generate:favicons';
+	protected $signature = 'favicon:generate';
 
 	/**
 	 * The console command description.

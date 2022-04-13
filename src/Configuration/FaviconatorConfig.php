@@ -127,6 +127,6 @@ class FaviconatorConfig
 	{
 		File::disk()->put($this->configPath, YAML::dump($this->configData));
 
-		Artisan::call('generate:favicons');
+		Artisan::call('favicon:generate');
 	}
 }

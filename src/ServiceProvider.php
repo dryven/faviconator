@@ -24,10 +24,6 @@ class ServiceProvider extends AddonServiceProvider
 		FaviconatorTags::class,
 	];
 
-	protected $commands = [
-		GenerateFavicons::class,
-	];
-
 	protected $routes = [
 		'cp' => __DIR__ . '/../routes/cp.php',
 	];
@@ -42,6 +38,10 @@ class ServiceProvider extends AddonServiceProvider
 			$this
 				->bootPermissions()
 				->bootNavigation();
+
+			$this->commands([
+				GenerateFavicons::class
+			]);
 
 			$this->loadTranslationsFrom(__DIR__ . '/../resources/lang', Faviconator::NAMESPACE);
 			$this->loadViewsFrom(__DIR__ . '/../resources/views', Faviconator::NAMESPACE);
