@@ -14,10 +14,6 @@
     -   Touch icons for smartphones and tablets.
 -   Add a Safari mask icon, to give your website an unique [pinned tab icon](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/pinnedTabs/pinnedTabs.html).
 
-## Documentation
-
-For more information about how to use this addon see our [documentation](DOCUMENTATION.md).
-
 ## Our other addons
 
 -   **[Cookie Byte](https://statamic.com/addons/dryven/cookie-byte):** Cookie Byte is an important addon to
