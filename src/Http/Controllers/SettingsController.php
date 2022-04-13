@@ -1,17 +1,17 @@
 <?php
 
-	namespace DDM\Faviconator\Http\Controllers;
+	namespace Dryven\Faviconator\Http\Controllers;
 
-	use DDM\Faviconator\Configuration\FaviconatorConfig;
-	use DDM\Faviconator\Faviconator;
+	use Dryven\Faviconator\Configuration\FaviconatorConfig;
+	use Dryven\Faviconator\Faviconator;
 	use Illuminate\Http\Request;
 	use Statamic\Facades\User;
 	use Statamic\Http\Controllers\CP\CpController;
 
 	/**
 	 * Class SettingsController
-	 * @package DDM\Faviconator\Http\Controllers
-	 * @author  DDM Studio
+	 * @package Dryven\Faviconator\Http\Controllers
+	 * @author dryven
 	 */
 	class SettingsController extends CpController {
 

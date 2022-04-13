@@ -1,9 +1,9 @@
 <?php
 
-	namespace DDM\Faviconator\Configuration;
+	namespace Dryven\Faviconator\Configuration;
 
-	use DDM\Faviconator\Commands\GenerateFavicons;
-	use DDM\Faviconator\Events\FaviconatorSettingsSaved;
+	use Dryven\Faviconator\Commands\GenerateFavicons;
+	use Dryven\Faviconator\Events\FaviconatorSettingsSaved;
 	use Illuminate\Http\Request;
 	use Illuminate\Support\Facades\Artisan;
 	use Statamic\Facades\Asset;
@@ -15,8 +15,8 @@
 
 	/**
 	 * Class FaviconatorConfig
-	 * @package DDM\Faviconator\Configuration
-	 * @author  DDM
+	 * @package Dryven\Faviconator\Configuration
+	 * @author dryven
 	 */
 	class FaviconatorConfig {
 

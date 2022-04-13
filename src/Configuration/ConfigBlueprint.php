@@ -1,15 +1,15 @@
 <?php
 
-	namespace DDM\Faviconator\Configuration;
+	namespace Dryven\Faviconator\Configuration;
 
-	use DDM\Faviconator\Faviconator;
+	use Dryven\Faviconator\Faviconator;
 	use Statamic\Facades\AssetContainer;
 	use Statamic\Tags\Asset;
 
 	/**
 	 * Class ConfigBlueprint
-	 * @package DDM\Faviconator\Configuration
-	 * @author  DDM Studio
+	 * @package Dryven\Faviconator\Configuration
+	 * @author dryven
 	 */
 	class ConfigBlueprint {
 

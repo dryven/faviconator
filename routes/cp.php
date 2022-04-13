@@ -1,7 +1,7 @@
 <?php
 
-	use DDM\Faviconator\Faviconator;
-	use DDM\Faviconator\Http\Controllers\SettingsController;
+	use Dryven\Faviconator\Faviconator;
+	use Dryven\Faviconator\Http\Controllers\SettingsController;
 	use Illuminate\Support\Facades\Route;
 
 	Route::prefix(Faviconator::NAMESPACE . '/')->name(Faviconator::NAMESPACE . '.')->group(function () {

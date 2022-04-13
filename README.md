@@ -1,7 +1,7 @@
 # Faviconator
 
 [![Statamic 3.0+](https://img.shields.io/badge/Statamic-3.0%2B-FF269E)](https://statamic.com/)
-[![GitHub release](https://img.shields.io/github/release/ddm-studio/faviconator.svg)](https://github.com/ddm-studio/faviconator/releases/)
+[![GitHub release](https://img.shields.io/github/release/dryven/faviconator.svg)](https://github.com/dryven/faviconator/releases/)
 
 > Adding favicons to your site the simple way. This way you can guarantee your
 > websites even more customisability without a developer having to strike a key.
@@ -20,6 +20,6 @@ For more information about how to use this addon see our [documentation](DOCUMEN
 
 ## Our other addons
 
-* **[Cookie Byte](https://statamic.com/index.php/addons/ddm-studio/cookie-byte):** Cookie Byte is an important addon to
+* **[Cookie Byte](https://statamic.com/addons/dryven/cookie-byte):** Cookie Byte is an important addon to
   make your website fit for the current privacy and cookie policies. It adds a modal and many other privacy-related
   features to your website.

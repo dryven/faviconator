@@ -1,6 +1,6 @@
 <?php
 
-	namespace DDM\Faviconator;
+	namespace Dryven\Faviconator;
 
 	use Statamic\Facades\YAML;
 
@@ -8,8 +8,8 @@
 	 * Global definitions and routines.
 	 *
 	 * Class Faviconator
-	 * @package DDM\Faviconator
-	 * @author  DDM
+	 * @package Dryven\Faviconator
+	 * @author dryven
 	 */
 	class Faviconator {
 

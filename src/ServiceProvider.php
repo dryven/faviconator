@@ -1,9 +1,9 @@
 <?php
 
-	namespace DDM\Faviconator;
+	namespace Dryven\Faviconator;
 
-	use DDM\Faviconator\Commands\GenerateFavicons;
-	use DDM\Faviconator\Tags\FaviconatorTags;
+	use Dryven\Faviconator\Commands\GenerateFavicons;
+	use Dryven\Faviconator\Tags\FaviconatorTags;
 	use Statamic\Facades\CP\Nav;
 	use Statamic\Facades\Permission;
 	use Statamic\Providers\AddonServiceProvider;
@@ -14,8 +14,8 @@
 	 * This is where the magic begins.
 	 *
 	 * Class ServiceProvider
-	 * @package DDM\Faviconator
-	 * @author  DDM
+	 * @package Dryven\Faviconator
+	 * @author dryven
 	 */
 	class ServiceProvider extends AddonServiceProvider {
 

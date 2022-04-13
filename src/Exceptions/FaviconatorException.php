@@ -1,13 +1,13 @@
 <?php
 
-	namespace DDM\Faviconator\Exceptions;
+	namespace Dryven\Faviconator\Exceptions;
 
 	use Exception;
 
 	/**
 	 * Class FaviconatorException
-	 * @package DDM\Faviconator\Exception
-	 * @author  DDM Studio
+	 * @package Dryven\Faviconator\Exception
+	 * @author dryven
 	 */
 	class FaviconatorException extends Exception {
 

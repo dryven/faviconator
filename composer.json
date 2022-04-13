@@ -1,5 +1,5 @@
 {
-	"name": "ddm-studio/faviconator",
+	"name": "dryven/faviconator",
 	"type": "statamic-addon",
 	"version": "1.0.0",
 	"description": "",
@@ -10,13 +10,13 @@
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "DDM",
-			"email": "hallo@ddm.studio",
-			"homepage": "https://ddm.studio/"
+			"name": "dryven",
+			"email": "hallo@dryven.at",
+			"homepage": "https://dryven.at/"
 		}
 	],
 	"support": {
-		"email": "support@ddm.studio"
+		"email": "support@dryven.at"
 	},
 	"require": {
 		"php": "^7.3 || ^8.0",
@@ -25,19 +25,24 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"DDM\\Faviconator\\": "src"
+			"Dryven\\Faviconator\\": "src"
 		}
 	},
 	"extra": {
 		"laravel": {
 			"providers": [
-				"DDM\\Faviconator\\ServiceProvider"
+				"Dryven\\Faviconator\\ServiceProvider"
 			]
 		},
 		"statamic": {
 			"name": "Faviconator",
 			"description": "",
 			"version": "1.0.0"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"pixelfear/composer-dist-plugin": true
 		}
 	}
 }

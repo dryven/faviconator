@@ -1,16 +1,16 @@
 <?php
 
-	namespace DDM\Faviconator\Commands;
+	namespace Dryven\Faviconator\Commands;
 
-	use DDM\Faviconator\Configuration\FaviconatorConfig;
-	use DDM\Faviconator\Faviconator;
+	use Dryven\Faviconator\Configuration\FaviconatorConfig;
+	use Dryven\Faviconator\Faviconator;
 	use Illuminate\Console\Command;
 	use Statamic\Facades\File;
 
 	/**
 	 * Class GenerateFavicons
-	 * @package DDM\Commands
-	 * @author  DDM
+	 * @package Dryven\Commands
+	 * @author dryven
 	 */
 	class GenerateFavicons extends Command {
 

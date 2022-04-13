@@ -1,16 +1,16 @@
 <?php
 
-	namespace DDM\Faviconator\Tags;
+	namespace Dryven\Faviconator\Tags;
 
-	use DDM\Faviconator\Configuration\FaviconatorConfig;
-	use DDM\Faviconator\Faviconator;
+	use Dryven\Faviconator\Configuration\FaviconatorConfig;
+	use Dryven\Faviconator\Faviconator;
 	use Statamic\Facades\Folder;
 	use Statamic\Tags\Tags;
 
 	/**
 	 * Class Faviconator
-	 * @package DDM\Faviconator\Tags
-	 * @author  DDM
+	 * @package Dryven\Faviconator\Tags
+	 * @author dryven
 	 */
 	class FaviconatorTags extends Tags {
 
