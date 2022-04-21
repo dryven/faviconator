@@ -99,7 +99,7 @@ class GenerateFavicons extends Command
 		// Crop the image only if the image has not a ratio of 1 : 1
 		if (imagesx($image) / (float)imagesy($image) !== 1.0) {
 			$this->line(
-				'The given image was not rectangular, so it was cropped. Please check the output.',
+				'The given image was not square, so it was cropped. Please check the output.',
 				'fg=yellow'
 			);
 
