@@ -52,15 +52,6 @@ class ConfigBlueprint
 							]
 						],
 						[
-							'handle' => 'app_name',
-							'field' => [
-								'type' => 'text',
-								'display' => Faviconator::getCpTranslation('app_name'),
-								'instructions' => Faviconator::getCpTranslation('app_name_instructions'),
-								'placeholder' => Faviconator::getCpTranslation('app_name_placeholder'),
-							]
-						],
-						[
 							'handle' => 'theme_color',
 							'field' => [
 								'type' => 'color',
