@@ -4,7 +4,7 @@
 {{ favicons }}
 	<link rel="{{ relation }}" sizes="{{ dimensions }}" href="{{ file }}?v={{ checksum }}">
 {{ /favicons }}
-	{{ if file_svg }}<link rel="icon" href="/favicon.svg?v={{ file_svg_checksum }}">{{ /if }}
+	{{ if file_svg }}<link rel="mask-icon" href="/favicon.svg?v={{ file_svg_checksum }}">{{ /if }}
 	<link rel="icon" href="/favicon.ico?v={{ favicon_ico_checksum }}">
 	<meta name="theme-color" content="{{ favicons:theme_color ?? '#ffffff' }}">
 {{ /if }}
