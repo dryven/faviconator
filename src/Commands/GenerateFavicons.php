@@ -62,32 +62,34 @@ class GenerateFavicons extends Command
 
 		// Get the image file from the settings
 		$assetContainer = ConfigBlueprint::getAssetsContainer();
-		$sourceFile = $this->config->assetPath('file_png')->path();
-		$image = imagecreatefromstring(File::disk($assetContainer->handle())->get($sourceFile));
+		$sourceFile = $this->config->assetPath('file_png');
+		$sourceFile = isset($sourceFile) ? File::disk($assetContainer->handle())->get($sourceFile->path()) : null;
 		$svgFile = $this->config->assetPath('file_svg');
 		$svgFile = isset($svgFile) ? File::disk($assetContainer->handle())->get($svgFile->path()) : null;
 
-		if ($image === false) {
-			$this->line('The given file was not an image.', 'fg=red');
-			return self::FAILURE;
-		}
+		if (isset($sourceFile)) {
+			if (($image = imagecreatefromstring($sourceFile)) === false) {
+				$this->line('The given file was not an image.', 'fg=red');
+				return self::FAILURE;
+			}
 
-		if ($this->cropImageIfNecessary($image) == self::FAILURE) {
-			$this->line('Image could not be cropped.', 'fg=red');
-			return self::FAILURE;
-		}
+			if ($this->cropImageIfNecessary($image) == self::FAILURE) {
+				$this->line('Image could not be cropped.', 'fg=red');
+				return self::FAILURE;
+			}
 
-		if ($this->resizeImageIfNecessary($image) == self::FAILURE) {
-			$this->line('Image could not be resized.', 'fg=red');
-			return self::FAILURE;
-		}
+			if ($this->resizeImageIfNecessary($image) == self::FAILURE) {
+				$this->line('Image could not be resized.', 'fg=red');
+				return self::FAILURE;
+			}
 
-		if ($this->generateIcoFile($image) == self::FAILURE) {
-			$this->line('ICO image file could not be created.', 'fg=red');
-		}
+			if ($this->generateIcoFile($image) == self::FAILURE) {
+				$this->line('ICO image file could not be created.', 'fg=red');
+			}
 
-		if ($this->generateFaviconFiles($image) == self::FAILURE) {
-			$this->line('The favicon pngs could not be created.', 'fg=red');
+			if ($this->generateFaviconFiles($image) == self::FAILURE) {
+				$this->line('The favicon pngs could not be created.', 'fg=red');
+			}
 		}
 
 		if ($svgFile !== null && $this->copySvgFavicon($svgFile) === self::FAILURE) {
