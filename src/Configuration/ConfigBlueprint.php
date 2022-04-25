@@ -13,11 +13,11 @@ use Statamic\Facades\AssetContainer;
 class ConfigBlueprint
 {
 
-	private static function getAssetsContainerHandle()
+	public static function getAssetsContainer()
 	{
 		$configHandle = Faviconator::getConfig('assets.container') ?? '';
 
-		return AssetContainer::findByHandle($configHandle) ? $configHandle : AssetContainer::all()->all()[0]->handle();
+		return AssetContainer::findByHandle($configHandle) ?? AssetContainer::all()->first();
 	}
 
 	public static function getBlueprint(): array
@@ -34,7 +34,7 @@ class ConfigBlueprint
 								'display' => Faviconator::getCpTranslation('file_png'),
 								'instructions' => Faviconator::getCpTranslation('file_png_instructions'),
 								'placeholder' => Faviconator::getCpTranslation('file_png_placeholder'),
-								'container' => self::getAssetsContainerHandle(),
+								'container' => self::getAssetsContainer()->handle(),
 								'max_files' => 1,
 								'validate' => 'mimes:png'
 							]
@@ -46,7 +46,7 @@ class ConfigBlueprint
 								'display' => Faviconator::getCpTranslation('file_svg'),
 								'instructions' => Faviconator::getCpTranslation('file_svg_instructions'),
 								'placeholder' => Faviconator::getCpTranslation('file_svg_placeholder'),
-								'container' => self::getAssetsContainerHandle(),
+								'container' => self::getAssetsContainer()->handle(),
 								'max_files' => 1,
 								'validate' => 'mimes:svg'
 							]
