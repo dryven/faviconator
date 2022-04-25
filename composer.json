@@ -1,8 +1,8 @@
 {
 	"name": "dryven/faviconator",
 	"type": "statamic-addon",
-	"version": "1.0.0",
-	"description": "",
+	"version": "1.0.1",
+	"description": "Adding favicons to your site the simple way.",
 	"keywords": [
 		"favicon",
 		"favicon generator"
@@ -36,8 +36,8 @@
 		},
 		"statamic": {
 			"name": "Faviconator",
-			"description": "",
-			"version": "1.0.0"
+			"description": "Adding favicons to your site the simple way.",
+			"version": "1.0.1"
 		}
 	},
 	"config": {
