@@ -2,10 +2,13 @@
 
 namespace Dryven\Faviconator\Tags;
 
+use Dryven\Faviconator\Configuration\ConfigBlueprint;
 use Statamic\Tags\Tags;
 use Statamic\Facades\Folder;
 use Dryven\Faviconator\Faviconator;
 use Dryven\Faviconator\Configuration\FaviconatorConfig;
+use Illuminate\Support\Facades\File;
+use Throwable;
 
 /**
  * Class Faviconator
@@ -36,12 +39,24 @@ class FaviconatorTags extends Tags
 
 		foreach ($images as &$image) {
 			$image['file'] = str_replace('/public', '', $image['file']);
+			$image['checksum'] = $this->getFileHash(public_path($image['file']));
 			preg_match("/\d+x\d+/", $image['filename'], $sizes);
 			$image['dimensions'] = $sizes[0];
 
 			$image['relation'] = (str_contains($image['filename'], 'apple-touch-icon')) ? 'apple-touch-icon' : 'icon';
 		}
 
-		return view(Faviconator::getNamespacedKey('favicons'), collect(array_add($this->config->raw(), 'favicons', $images)));
+		return view(
+			Faviconator::getNamespacedKey('favicons'),
+			collect([
+				'favicons' => $images,
+				'file_svg_checksum' => $this->getFileHash(public_path('favicon.svg')),
+				'favicon_ico_checksum' => $this->getFileHash(public_path('favicon.ico')),
+			])->merge($this->config->raw())
+		);
+	}
+
+	protected function getFileHash($file) {
+		return File::exists($file) ? hash_file('crc32b', $file) : null;
 	}
 }

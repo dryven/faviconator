@@ -57,7 +57,7 @@ class FaviconatorConfig
 	 */
 	public function assetPath($handle)
 	{
-		if (!isset($this->values()[$handle])) return null;
+		if (empty($this->values()[$handle])) return null;
 
 		return Asset::find($this->values()[$handle][0]);
 	}

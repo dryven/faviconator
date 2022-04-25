@@ -2,10 +2,12 @@
 
 namespace Dryven\Faviconator\Commands;
 
+use Dryven\Faviconator\Configuration\ConfigBlueprint;
 use Statamic\Facades\File;
 use Illuminate\Console\Command;
 use Dryven\Faviconator\Faviconator;
 use Dryven\Faviconator\Configuration\FaviconatorConfig;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class GenerateFavicons
@@ -59,8 +61,11 @@ class GenerateFavicons extends Command
 		$this->config = new FaviconatorConfig();
 
 		// Get the image file from the settings
+		$assetContainer = ConfigBlueprint::getAssetsContainer();
 		$sourceFile = $this->config->assetPath('file_png')->path();
-		$image = imagecreatefromstring(File::disk('assets')->get($sourceFile));
+		$image = imagecreatefromstring(File::disk($assetContainer->handle())->get($sourceFile));
+		$svgFile = $this->config->assetPath('file_svg');
+		$svgFile = isset($svgFile) ? File::disk($assetContainer->handle())->get($svgFile->path()) : null;
 
 		if ($image === false) {
 			$this->line('The given file was not an image.', 'fg=red');
@@ -83,6 +88,10 @@ class GenerateFavicons extends Command
 
 		if ($this->generateFaviconFiles($image) == self::FAILURE) {
 			$this->line('The favicon pngs could not be created.', 'fg=red');
+		}
+
+		if ($svgFile !== null && $this->copySvgFavicon($svgFile) === self::FAILURE) {
+			$this->line('The svg favicon could not be copied', 'fg=red');
 		}
 
 		return self::SUCCESS;
@@ -219,6 +228,13 @@ class GenerateFavicons extends Command
 		$filesizeString = '<fg=blue>' . strlen($icoData) . '</fg=blue>';
 
 		$this->line("<fg=green>An ICO with the dimensions $dimensionsString and a size of $filesizeString bytes was created.</fg=green>");
+
+		return self::SUCCESS;
+	}
+
+	private function copySvgFavicon($svgFile): bool
+	{
+		File::disk()->put(public_path('favicon.svg'), $svgFile);
 
 		return self::SUCCESS;
 	}
