@@ -52,6 +52,7 @@ class FaviconatorTags extends Tags
 				'favicons' => $images,
 				'file_svg_checksum' => $this->getFileHash(public_path('favicon.svg')),
 				'favicon_ico_checksum' => $this->getFileHash(public_path('favicon.ico')),
+				'theme_color' => 0,
 			])->merge($this->config->raw())
 		);
 	}

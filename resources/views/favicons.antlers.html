@@ -6,5 +6,5 @@
 {{ /favicons }}
 	{{ if file_svg }}<link rel="mask-icon" href="/favicon.svg?v={{ file_svg_checksum }}">{{ /if }}
 	<link rel="icon" href="/favicon.ico?v={{ favicon_ico_checksum }}">
-	<meta name="theme-color" content="{{ favicons:theme_color ?? '#ffffff' }}">
+	<meta name="theme-color" content="{{ theme_color ?? '#ffffff' }}">
 {{ /if }}
