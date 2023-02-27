@@ -3,6 +3,12 @@
 return [
 
 	/**
+	 *	Set a different favicon for each site you have configured.
+	 * 	When enabled it saves the configuration to a file containing the site handle .
+	 */
+	'multi_site' => false,
+
+	/**
 	 * For the purpose of actually providing a image file to generate a favicon from, we need some form of a
 	 * container. If you set container to null, it will grab the first assets container it finds in Statamic
 	 * (usually 'assets', if you haven't changed anything from the template), or else you can set a custom

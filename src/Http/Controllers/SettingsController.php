@@ -2,6 +2,7 @@
 
 namespace Dryven\Faviconator\Http\Controllers;
 
+use Statamic\Facades\Site;
 use Statamic\Facades\User;
 use Illuminate\Http\Request;
 use Dryven\Faviconator\Faviconator;
@@ -15,28 +16,20 @@ use Dryven\Faviconator\Configuration\FaviconatorConfig;
  */
 class SettingsController extends CpController
 {
-
-	protected $config;
-
-	public function __construct(Request $request)
-	{
-		parent::__construct($request);
-
-		$this->config = new FaviconatorConfig();
-	}
-
 	public function index()
 	{
 		// No access if the user doesn't have the right permissions to show them
 		abort_unless(User::current()->hasPermission('super') ||
 			User::current()->hasPermission(Faviconator::PERMISSION_GENERAL_KEY), 403);
 
+		$config = $this->getFaviconatorConfig();
+
 		return view(Faviconator::getNamespacedKey('settings'), [
 			'title' => Faviconator::getCpTranslation('title'),
 			'action' => cp_route(Faviconator::ROUTE_SETTINGS_INDEX),
-			'blueprint' => $this->config->blueprint()->toPublishArray(),
-			'values' => $this->config->values(),
-			'meta' => $this->config->fields()->meta()
+			'blueprint' => $config->blueprint()->toPublishArray(),
+			'values' => $config->values(),
+			'meta' => $config->fields()->meta()
 		]);
 	}
 
@@ -46,8 +39,15 @@ class SettingsController extends CpController
 		abort_unless(User::current()->hasPermission('super') ||
 			User::current()->hasPermission(Faviconator::PERMISSION_GENERAL_KEY), 403);
 
-		$values = $this->config->validatedValues($request);
+		$config = $this->getFaviconatorConfig();
 
-		$this->config->setValues($values)->save();
+		$values = $config->validatedValues($request);
+
+		$config->setValues($values)->save();
+	}
+
+	private function getFaviconatorConfig(): FaviconatorConfig
+	{
+		return FaviconatorConfig::create(Site::selected()->handle());
 	}
 }
