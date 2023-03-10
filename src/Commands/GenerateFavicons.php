@@ -8,6 +8,8 @@ use Illuminate\Console\Command;
 use Dryven\Faviconator\Faviconator;
 use Dryven\Faviconator\Configuration\FaviconatorConfig;
 use Illuminate\Support\Facades\Log;
+use Statamic\Facades\Site;
+use function public_path;
 
 /**
  * Class GenerateFavicons
@@ -23,7 +25,7 @@ class GenerateFavicons extends Command
 	 *
 	 * @var string
 	 */
-	protected $signature = 'favicon:generate';
+	protected $signature = 'favicon:generate {--site=}';
 
 	/**
 	 * The console command description.
@@ -33,6 +35,8 @@ class GenerateFavicons extends Command
 	protected $description = 'Generates favicon images';
 
 	protected $config;
+
+	private $siteHandle;
 
 	/**
 	 * Create a new command instance.
@@ -53,12 +57,14 @@ class GenerateFavicons extends Command
 	{
 		// Check that the gd library extension is loaded correctly
 		if (extension_loaded('gd') === false) {
-			$this->line('The gd extendion could not be found. Please install and/or enable it in the php.ini file.', 'fg=red');
+			$this->line('The gd extension could not be found. Please install and/or enable it in the php.ini file.', 'fg=red');
 			return self::FAILURE;
 		}
 
+		$this->siteHandle = $this->option('site') ?? Site::current()->handle;
+
 		// Set the config variable accordingly
-		$this->config = new FaviconatorConfig();
+		$this->config = FaviconatorConfig::create($this->option('site') ?? Site::current()->handle);
 
 		// Get the image file from the settings
 		$assetContainer = ConfigBlueprint::getAssetsContainer();
@@ -220,7 +226,7 @@ class GenerateFavicons extends Command
 		$icoData .= $imageData;
 		unset($imageData);
 
-		File::disk()->put(public_path('favicon.ico'), $icoData);
+		File::disk()->put($this->faviconPath('favicon.ico'), $icoData);
 
 		$dimensions = collect($icoSizes)->map(function ($size) {
 			return $size . 'x' . $size;
@@ -236,7 +242,7 @@ class GenerateFavicons extends Command
 
 	private function copySvgFavicon($svgFile): bool
 	{
-		File::disk()->put(public_path('favicon.svg'), $svgFile);
+		File::disk()->put($this->faviconPath('favicon.svg'), $svgFile);
 
 		return self::SUCCESS;
 	}
@@ -248,7 +254,7 @@ class GenerateFavicons extends Command
 	private function generateFaviconFiles($image): bool
 	{
 		// Create directories to save the favicon in, if they don't exist
-		File::disk()->makeDirectory(public_path(Faviconator::getConfig('assets.path') ?? 'img/favicons/'));
+		File::disk()->makeDirectory($this->faviconPath());
 
 		$genericSizes = Faviconator::getConfig('favicon_sizes');
 		$appleTouchIconSizes = Faviconator::getConfig('apple_touch_icon_sizes');
@@ -281,7 +287,7 @@ class GenerateFavicons extends Command
 			}
 			$pngImage = ob_get_clean();
 
-			$filepath = public_path((Faviconator::getConfig('assets.path') ?? 'img/favicons/') . $name . "-${size}x$size.png");
+			$filepath = $this->faviconPath($name . "-${size}x$size.png");
 
 			File::disk()->put($filepath, $pngImage);
 		}
@@ -323,5 +329,15 @@ class GenerateFavicons extends Command
 	private function getRecommendedImageSize()
 	{
 		return max(array_keys(Faviconator::getConfig('favicon_sizes')));
+	}
+
+	private function faviconPath(string $path = ''): string
+	{
+		$basePath = Faviconator::getConfig('assets.path') ?? 'img/favicons/';
+		if (Faviconator::getConfig('multi_site')) {
+			$basePath .= $this->siteHandle . '/';
+		}
+
+		return public_path($basePath . $path);
 	}
 }

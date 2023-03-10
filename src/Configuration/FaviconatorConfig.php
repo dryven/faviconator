@@ -2,6 +2,7 @@
 
 namespace Dryven\Faviconator\Configuration;
 
+use Dryven\Faviconator\Faviconator;
 use Statamic\Support\Arr;
 use Statamic\Facades\File;
 use Statamic\Facades\YAML;
@@ -10,6 +11,8 @@ use Statamic\Fields\Fields;
 use Illuminate\Http\Request;
 use Statamic\Fields\Blueprint;
 use Illuminate\Support\Facades\Artisan;
+use function base_path;
+use function sprintf;
 
 /**
  * Class FaviconatorConfig
@@ -18,16 +21,22 @@ use Illuminate\Support\Facades\Artisan;
  */
 class FaviconatorConfig
 {
-
 	protected $blueprint;
 	protected $configPath;
 	protected $configData;
+	protected string $handle;
 
-	public function __construct()
+	public function __construct(string $handle)
 	{
 		$this->blueprint = \Statamic\Facades\Blueprint::make()->setContents(ConfigBlueprint::getBlueprint());
-		$this->configPath = base_path("content/faviconator.yaml");
+		$this->configPath = $this->getConfigurationPath($handle);
+		$this->handle = $handle;
 		$this->configData = YAML::parse(File::disk()->get($this->configPath));
+	}
+
+	public static function create(string $handle): self
+	{
+		return new self($handle);
 	}
 
 	/**
@@ -127,6 +136,19 @@ class FaviconatorConfig
 	{
 		File::disk()->put($this->configPath, YAML::dump($this->configData));
 
-		Artisan::call('favicon:generate');
+		Artisan::call(sprintf('favicon:generate --site=%s', $this->handle));
+	}
+
+	private function getConfigurationPath(string $handle): string
+	{
+		$suffix = '';
+
+		if (Faviconator::getConfig('multi_site')) {
+			$suffix = sprintf('_%s', $handle);
+		}
+
+		return base_path(
+			sprintf('content/faviconator%s.yaml', $suffix)
+		);
 	}
 }
