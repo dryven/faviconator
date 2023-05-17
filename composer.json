@@ -1,7 +1,7 @@
 {
 	"name": "dryven/faviconator",
 	"type": "statamic-addon",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Adding favicons to your site the simple way.",
 	"keywords": [
 		"favicon",
@@ -11,16 +11,16 @@
 	"authors": [
 		{
 			"name": "dryven",
-			"email": "hallo@dryven.at",
-			"homepage": "https://dryven.at/"
+			"email": "hallo@dryven.com",
+			"homepage": "https://dryven.com/"
 		}
 	],
 	"support": {
-		"email": "support@dryven.at"
+		"email": "support@dryven.com"
 	},
 	"require": {
-		"php": "^7.3 || ^8.0",
-		"statamic/cms": "^3.0",
+		"php": "^7.4 || ^8.0",
+		"statamic/cms": "^3.0 || ^4.0",
 		"ext-gd": "*"
 	},
 	"autoload": {
@@ -37,7 +37,7 @@
 		"statamic": {
 			"name": "Faviconator",
 			"description": "Adding favicons to your site the simple way.",
-			"version": "1.1.0"
+			"version": "1.2.0"
 		}
 	},
 	"config": {
