@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.2.0] - 2023-05-17
+
+### Added
+
+* Add support for Statamic 4.x
+
 ## [v1.1.0] - 2023-03-10
 
 ### Added
