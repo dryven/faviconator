@@ -2,14 +2,13 @@
 
 namespace Dryven\Faviconator\Commands;
 
-use Dryven\Faviconator\Configuration\ConfigBlueprint;
+use function public_path;
 use Statamic\Facades\File;
+use Statamic\Facades\Site;
 use Illuminate\Console\Command;
 use Dryven\Faviconator\Faviconator;
+use Dryven\Faviconator\Configuration\ConfigBlueprint;
 use Dryven\Faviconator\Configuration\FaviconatorConfig;
-use Illuminate\Support\Facades\Log;
-use Statamic\Facades\Site;
-use function public_path;
 
 /**
  * Class GenerateFavicons
@@ -72,6 +71,9 @@ class GenerateFavicons extends Command
 		$sourceFile = isset($sourceFile) ? File::disk($assetContainer->handle())->get($sourceFile->path()) : null;
 		$svgFile = $this->config->assetPath('file_svg');
 		$svgFile = isset($svgFile) ? File::disk($assetContainer->handle())->get($svgFile->path()) : null;
+
+		// fresh start
+		\Illuminate\Support\Facades\File::cleanDirectory($this->faviconPath());
 
 		if (isset($sourceFile)) {
 			if (($image = imagecreatefromstring($sourceFile)) === false) {
@@ -287,7 +289,7 @@ class GenerateFavicons extends Command
 			}
 			$pngImage = ob_get_clean();
 
-			$filepath = $this->faviconPath($name . "-${size}x$size.png");
+			$filepath = $this->faviconPath($name . "-$size" . "x$size.png");
 
 			File::disk()->put($filepath, $pngImage);
 		}

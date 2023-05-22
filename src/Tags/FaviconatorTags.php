@@ -2,15 +2,13 @@
 
 namespace Dryven\Faviconator\Tags;
 
-use Dryven\Faviconator\Configuration\ConfigBlueprint;
-use Statamic\Facades\Site;
 use Statamic\Tags\Tags;
+use function public_path;
+use Statamic\Facades\Site;
 use Statamic\Facades\Folder;
 use Dryven\Faviconator\Faviconator;
-use Dryven\Faviconator\Configuration\FaviconatorConfig;
 use Illuminate\Support\Facades\File;
-use Throwable;
-use function public_path;
+use Dryven\Faviconator\Configuration\FaviconatorConfig;
 
 /**
  * Class Faviconator
@@ -24,7 +22,9 @@ class FaviconatorTags extends Tags
 	public function index()
 	{
 		$imagesPath = $this->faviconPath();
-		$images = Folder::disk()->getFiles($imagesPath)->toArray();
+		$images = Folder::disk()
+			->getFiles($imagesPath)
+			->toArray();
 
 		if (empty($images))
 			return view(Faviconator::getNamespacedKey('favicons'), collect(
@@ -32,15 +32,12 @@ class FaviconatorTags extends Tags
 			));
 
 		foreach ($images as &$image) {
-
-			if ($image['extension'] !== 'png') {
-				continue;
-			}
-
 			$image['file'] = str_replace('/public', '', $image['file']);
 			$image['checksum'] = $this->getFileHash(public_path($image['file']));
 			preg_match("/\d+x\d+/", $image['filename'], $sizes);
-			$image['dimensions'] = $sizes[0];
+
+			if (count($sizes) > 0)
+				$image['dimensions'] = $sizes[0];
 
 			$image['relation'] = (str_contains($image['filename'], 'apple-touch-icon')) ? 'apple-touch-icon' : 'icon';
 		}

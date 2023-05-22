@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.2.1] - 2023-05-22
+
+### Fixed
+
+* Fix .ico and .svg paths
+* Empty folder before generating new favicons
+
 ## [v1.2.0] - 2023-05-17
 
 ### Added
