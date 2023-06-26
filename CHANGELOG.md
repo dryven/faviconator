@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.2.2] - 2023-06-26
+
+### Added
+
+* Add dutch (nl) translations (by @j-jalving)
+
 ## [v1.2.1] - 2023-05-22
 
 ### Fixed
