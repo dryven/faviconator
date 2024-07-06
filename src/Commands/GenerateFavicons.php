@@ -152,8 +152,8 @@ class GenerateFavicons extends Command
 
 		// Resize the image only if the image has not the qualified size
 		if (imagesx($image) < $minSize || imagesy($image) < $minSize) {
-			$this->line("<fg=yellow>The given image has a size of</fg=yellow> <fg=blue>${imageWidth}x$imageHeight" .
-				"<fg=yellow>, so it was resized to</fg=yellow> <fg=blue>${minSize}x$minSize</fg=blue>.");
+			$this->line("<fg=yellow>The given image has a size of</fg=yellow> <fg=blue>{$imageWidth}x{$imageHeight}" .
+				"<fg=yellow>, so it was resized to</fg=yellow> <fg=blue>{$minSize}x{$minSize}</fg=blue>.");
 
 			$image = imagescale($image, $minSize, $minSize, IMG_NEAREST_NEIGHBOUR);
 
@@ -289,7 +289,7 @@ class GenerateFavicons extends Command
 			}
 			$pngImage = ob_get_clean();
 
-			$filepath = $this->faviconPath($name . "-$size" . "x$size.png");
+			$filepath = $this->faviconPath("{$name}-{$size}x{$size}.png");
 
 			File::disk()->put($filepath, $pngImage);
 		}
