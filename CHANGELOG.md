@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.3.1] - 2024-07-09
+
+### Fixed
+
+* fix: string interpolation in PHP 8.2+
+
 ## [v1.3.0] - 2024-05-15
 
 ### Added
