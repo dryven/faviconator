@@ -16,6 +16,7 @@ class Faviconator
 
 	public const PATH_STYLESHEET = "vendor/" . self::NAMESPACE . "/css/";
 	public const PATH_JAVASCRIPT = "vendor/" . self::NAMESPACE . "/js/";
+	public const PATH_BUILD = "/vendor/" . self::NAMESPACE . "/build/";
 
 	public const NAVIGATION_ITEM_KEY = self::NAMESPACE . "_settings";
 
@@ -26,6 +27,7 @@ class Faviconator
 	public const PERMISSION_GENERAL_KEY = self::NAMESPACE . "_general";
 
 	public const VENDOR_DEFAULT_SETTINGS_KEY = self::NAMESPACE . '-settings';
+	public const VENDOR_WEB_RESOURCES_KEY = self::NAMESPACE . '-resources-web';
 	public const VENDOR_VIEWS_KEY = self::NAMESPACE . '-views';
 	public const VENDOR_LANGUAGES_KEY = self::NAMESPACE . '-lang';
 	public const VENDOR_CONFIG_KEY = self::NAMESPACE . '-config';

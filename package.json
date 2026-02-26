@@ -1,0 +1,30 @@
+{
+    "name": "faviconator",
+    "version": "1.4.0",
+    "description": "Adding favicons to your site the simple way.",
+    "keywords": [
+        "favicon",
+        "favicon generator"
+    ],
+    "license": "MIT",
+    "author": "dryven",
+    "homepage": "https://github.com/dryven/faviconator#readme",
+	"bugs": {
+		"url": "https://github.com/dryven/faviconator/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dryven/faviconator.git"
+	},
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "dependencies": {
+        "@statamic/cms": "file:./vendor/statamic/cms/resources/dist-package"
+    },
+    "devDependencies": {
+        "laravel-vite-plugin": "^1.2.0",
+        "vite": "^6.3.4"
+    }
+}

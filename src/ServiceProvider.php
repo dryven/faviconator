@@ -28,27 +28,32 @@ class ServiceProvider extends AddonServiceProvider
 		'cp' => __DIR__ . '/../routes/cp.php',
 	];
 
+	protected $vite = [
+        'publicDirectory' => 'dist',
+        'input' => [
+            'resources/js/cp.js',	
+        ],
+    ];
+
 	protected $publishAfterInstall = false;
 
-	public function boot()
+	public function bootAddon()
 	{
-		parent::boot();
+		$this
+			->bootPermissions()
+			->bootNavigation();
 
-		Statamic::booted(function () {
-			$this
-				->bootPermissions()
-				->bootNavigation();
+		$this->commands([
+			GenerateFavicons::class
+		]);
 
-			$this->commands([
-				GenerateFavicons::class
-			]);
-
-			$this->loadTranslationsFrom(__DIR__ . '/../resources/lang', Faviconator::NAMESPACE);
-			$this->loadViewsFrom(__DIR__ . '/../resources/views', Faviconator::NAMESPACE);
-		});
+		$this->loadTranslationsFrom(__DIR__ . '/../resources/lang', Faviconator::NAMESPACE);
+		$this->loadViewsFrom(__DIR__ . '/../resources/views', Faviconator::NAMESPACE);
 
 		Statamic::afterInstalled(function ($command) {
 			$command->call('vendor:publish', ['--tag' => Faviconator::VENDOR_CONFIG_KEY]);
+
+			$command->call('vendor:publish', ['--tag' => Faviconator::VENDOR_WEB_RESOURCES_KEY, '--force' => true]);
 		});
 	}
 
@@ -65,7 +70,7 @@ class ServiceProvider extends AddonServiceProvider
 				->can(Faviconator::PERMISSION_GENERAL_KEY)
 				->route(Faviconator::ROUTE_SETTINGS_INDEX)
 				->section('Tools')
-				->icon('browser-com');
+				->icon('globe-world-wide-web');
 		});
 
 		return $this;
@@ -105,6 +110,10 @@ class ServiceProvider extends AddonServiceProvider
 		$this->publishes([
 			__DIR__ . '/../resources/views' => resource_path('views/vendor/' . Faviconator::NAMESPACE),
 		], Faviconator::VENDOR_VIEWS_KEY);
+
+		$this->publishes([
+			__DIR__ . '/../dist/build' => public_path(Faviconator::PATH_BUILD),
+		], Faviconator::VENDOR_WEB_RESOURCES_KEY);
 
 		$this->publishes([
 			__DIR__ . '/../resources/lang' => resource_path('lang/vendor/' . Faviconator::NAMESPACE),

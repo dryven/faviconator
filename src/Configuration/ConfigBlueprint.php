@@ -23,45 +23,49 @@ class ConfigBlueprint
 	public static function getBlueprint(): array
 	{
 		return [
-			'sections' => [
-				'general' => [
+			'tabs' => [
+				'main' => [
 					'display' => Faviconator::getCpTranslation('tab_general'),
-					'fields' => [
+					'sections' => [
 						[
-							'handle' => 'file_png',
-							'field' => [
-								'type' => 'assets',
-								'display' => Faviconator::getCpTranslation('file_png'),
-								'instructions' => Faviconator::getCpTranslation('file_png_instructions'),
-								'placeholder' => Faviconator::getCpTranslation('file_png_placeholder'),
-								'container' => self::getAssetsContainer()->handle(),
-								'max_files' => 1,
-								'validate' => 'mimes:png'
-							]
-						],
-						[
-							'handle' => 'file_svg',
-							'field' => [
-								'type' => 'assets',
-								'display' => Faviconator::getCpTranslation('file_svg'),
-								'instructions' => Faviconator::getCpTranslation('file_svg_instructions'),
-								'placeholder' => Faviconator::getCpTranslation('file_svg_placeholder'),
-								'container' => self::getAssetsContainer()->handle(),
-								'max_files' => 1,
-								'validate' => 'mimes:svg'
-							]
-						],
-						[
-							'handle' => 'theme_color',
-							'field' => [
-								'type' => 'color',
-								'display' => Faviconator::getCpTranslation('theme_color'),
-								'instructions' => Faviconator::getCpTranslation('theme_color_instructions'),
-								'placeholder' => Faviconator::getCpTranslation('theme_color_placeholder'),
-								'color_modes' => [
-									'hex',
+							'fields' => [
+								[
+									'handle' => 'file_png',
+									'field' => [
+										'type' => 'assets',
+										'display' => Faviconator::getCpTranslation('file_png'),
+										'instructions' => Faviconator::getCpTranslation('file_png_instructions'),
+										'placeholder' => Faviconator::getCpTranslation('file_png_placeholder'),
+										'container' => self::getAssetsContainer()->handle(),
+										'max_files' => 1,
+										'validate' => 'mimes:png'
+									]
 								],
-								'default_color_mode' => 'HEXA',
+								[
+									'handle' => 'file_svg',
+									'field' => [
+										'type' => 'assets',
+										'display' => Faviconator::getCpTranslation('file_svg'),
+										'instructions' => Faviconator::getCpTranslation('file_svg_instructions'),
+										'placeholder' => Faviconator::getCpTranslation('file_svg_placeholder'),
+										'container' => self::getAssetsContainer()->handle(),
+										'max_files' => 1,
+										'validate' => 'mimes:svg'
+									]
+								],
+								[
+									'handle' => 'theme_color',
+									'field' => [
+										'type' => 'color',
+										'display' => Faviconator::getCpTranslation('theme_color'),
+										'instructions' => Faviconator::getCpTranslation('theme_color_instructions'),
+										'placeholder' => Faviconator::getCpTranslation('theme_color_placeholder'),
+										'color_modes' => [
+											'hex',
+										],
+										'default_color_mode' => 'HEXA',
+									]
+								]
 							]
 						]
 					]
