@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Dryven\Faviconator\Faviconator;
 use Statamic\Http\Controllers\CP\CpController;
 use Dryven\Faviconator\Configuration\FaviconatorConfig;
+use Inertia\Inertia;
 
 /**
  * Class SettingsController
@@ -24,13 +25,15 @@ class SettingsController extends CpController
 
 		$config = $this->getFaviconatorConfig();
 
-		return view(Faviconator::getNamespacedKey('settings'), [
+		$variables = [
 			'title' => Faviconator::getCpTranslation('title'),
 			'action' => cp_route(Faviconator::ROUTE_SETTINGS_INDEX),
-			'blueprint' => $config->blueprint()->toPublishArray(),
-			'values' => $config->values(),
-			'meta' => $config->fields()->meta()
-		]);
+			'initialBlueprint' => $config->blueprint()->toPublishArray(),
+			'initialValues' => $config->values(),
+			'initialMeta' => $config->fields()->meta()
+		];
+
+		return Inertia::render(Faviconator::getNamespacedKey('settings'), $variables);
 	}
 
 	public function update(Request $request)
