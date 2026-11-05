@@ -5,6 +5,8 @@ return [
 	/**
 	 *	Set a different favicon for each site you have configured.
 	 * 	When enabled it saves the configuration to a file containing the site handle .
+	 *  Note: root favicon fallbacks (/favicon.ico, /favicon.svg, /favicon.png) are
+	 *  only published when multi_site is disabled.
 	 */
 	'multi_site' => false,
 
@@ -38,9 +40,12 @@ return [
 	 * These are the generic favicon sizes, you'll see around the internet. You shouldn't worry too much about
 	 * which sizes are included here, because the browser will make a good guesswork which size will fit best,
 	 * but if you know what you're doing, than please go ahead, and add as many sizes to the list, as you'd like!
+	 *
+	 * Include at least one size larger than 48x48 (e.g. 96) so Google Search can pick a crisp favicon.
 	 */
 	'favicon_sizes' => [
 		32,
+		48,
 		64,
 		96,
 		128,

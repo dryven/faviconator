@@ -104,6 +104,8 @@ class GenerateFavicons extends Command
 			$this->line('The svg favicon could not be copied', 'fg=red');
 		}
 
+		$this->publishRootFallbacks();
+
 		return self::SUCCESS;
 	}
 
@@ -250,6 +252,70 @@ class GenerateFavicons extends Command
 	}
 
 	/**
+	 * Copy well-known favicon fallbacks to the public root.
+	 * Browsers, Firefox Mobile and Google often request /favicon.ico directly.
+	 */
+	private function publishRootFallbacks(): void
+	{
+		if (Faviconator::getConfig('multi_site')) {
+			$this->line('Skipping root favicon publish because multi_site is enabled.', 'fg=yellow');
+			return;
+		}
+
+		$published = [];
+
+		foreach (['favicon.ico', 'favicon.svg'] as $filename) {
+			$source = $this->faviconPath($filename);
+
+			if (!\Illuminate\Support\Facades\File::exists($source)) {
+				continue;
+			}
+
+			\Illuminate\Support\Facades\File::copy($source, public_path($filename));
+			$published[] = "/{$filename}";
+		}
+
+		$pngSource = $this->preferredRootPngPath();
+
+		if ($pngSource !== null) {
+			\Illuminate\Support\Facades\File::copy($pngSource, public_path('favicon.png'));
+			$published[] = '/favicon.png';
+		}
+
+		if (!empty($published)) {
+			$list = '<fg=blue>' . implode('<fg=green>, </fg=green>', $published) . '</fg=blue>';
+			$this->line("<fg=green>Published root favicon fallbacks: $list</fg=green>");
+		}
+	}
+
+	/**
+	 * Prefer a PNG ≥ 48px (Google's recommendation) for the root fallback.
+	 */
+	private function preferredRootPngPath(): ?string
+	{
+		$sizes = collect(Faviconator::getConfig('favicon_sizes') ?? [])
+			->map(fn ($size) => (int) $size)
+			->filter(fn ($size) => $size >= 48)
+			->sortDesc()
+			->values();
+
+		// Prefer 96 when available, otherwise the largest ≥ 48.
+		$ordered = $sizes->contains(96)
+			? collect([96])->merge($sizes->reject(fn ($size) => $size === 96))
+			: $sizes;
+
+		foreach ($ordered as $size) {
+			$path = $this->faviconPath("favicon-{$size}x{$size}.png");
+
+			if (\Illuminate\Support\Facades\File::exists($path)) {
+				return $path;
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * @param $image
 	 * @return bool
 	 */
@@ -330,7 +396,9 @@ class GenerateFavicons extends Command
 	 */
 	private function getRecommendedImageSize()
 	{
-		return max(array_keys(Faviconator::getConfig('favicon_sizes')));
+		$sizes = Faviconator::getConfig('favicon_sizes') ?? [];
+
+		return !empty($sizes) ? max($sizes) : 192;
 	}
 
 	private function faviconPath(string $path = ''): string
